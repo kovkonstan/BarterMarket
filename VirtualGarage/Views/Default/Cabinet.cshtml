@@ -1,0 +1,84 @@
+﻿@model BarterMarket.Models.CabinetModel
+
+@{
+    ViewBag.Title = "Профиль пользователя | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+
+<!-- Blog Content Part ==================================================
+================================================== -->
+<div class="blankSeparator"></div>
+<div class="container blog">
+    @if (Model.UserNick == "admin")
+    {
+        <div class="two_third">
+            @if (Model.OfferModels.Count == 0)
+            {
+                <section class="post">
+                    <h2>Педложений пока нет</h2>
+                </section>
+            }
+            else
+            {
+                foreach (var offer in Model.OfferModels)
+                {
+                    <section class="post">
+                        <h2>@offer.OfferName</h2>
+                        <p class="meta">
+                            <span class="left">Дата: <strong>@offer.OfferDate.ToShortDateString()</strong></span>
+                            <span class="left">Количество пакетов:  <strong>@offer.OfferPacketsCount</strong></span>
+                            <span class="left tags">Местонахождение: <a href="#" rel="tag">Волгоград</a></span>
+                            <span class="left tags">Статус: <strong>@offer.OfferStatusName</strong></span>
+                        </p>
+                        <a href="@(Url.Action("GetImage", "Default", new { offer.OfferID }))" class="prettyPhoto[gal]"><img src="@(Url.Action("GetImage", "Default", new { offer.OfferID }))" alt="" /></a>
+                        <p>@offer.OfferDetails</p>
+                        <h4>Категория: @Html.ActionLink(offer.OfferCategoryName, "Offers", "Default", new RouteValueDictionary() { { "categoryID", offer.OfferCategoryID } }, new Dictionary<String, Object>() { })</h4>
+                        @Html.ActionLink("→ Подробнее", "OfferInfo", "Default", new RouteValueDictionary() { { "offerID", offer.OfferID } }, new Dictionary<String, Object>() { { "class", "buttonhome" } })
+                    </section>
+                }
+            }
+        </div>
+    }
+        
+    <!-- ten columns ends here -->
+    <!-- Blog Sidebar ==================================================
+    ================================================== -->
+    <div class="one_third lastcolumn sidebar">
+        <section class="first">
+            <h3>Мой профиль</h3>
+            <div class="boxtwosep"></div>
+            <ul class="blogList">
+                <li>
+                    @Html.ActionLink("Информация о профиле", "Settings", "Default", new RouteValueDictionary() { }, new Dictionary<String, Object>() { { "class", "about" } })
+                </li>
+                @*<li>
+                    @Html.ActionLink("Сертификаты", "UserCertificates", "Default", new RouteValueDictionary() { }, new Dictionary<String, Object>() { { "class", "about" } })
+                </li>*@
+                @*<li class="activenavigationItem">
+                    @Html.ActionLink("Активация", "Activation", "Default", new RouteValueDictionary() { }, new Dictionary<String, Object>() { { "class", "about" } })
+                </li>*@
+                <li>@Html.ActionLink("Кошелек", "UserPurse", "Default", new RouteValueDictionary() { }, new Dictionary<String, Object>() { { "class", "about" } })</li>
+                <li>@Html.ActionLink("Выход", "LogOut", "Account", new RouteValueDictionary() { }, new Dictionary<String, Object>() { { "class", "about" } })</li>
+            </ul>
+        </section>
+        @*<section class="second">
+            <h3>Мои предложения</h3>
+            <div class="actions">
+                <div class="action">
+                    @Html.ActionLink("+ Добавить предложение", "AddOffer", "Default", new RouteValueDictionary() { }, new Dictionary<String, Object>() { })
+                </div>
+            </div>
+            <div class="boxtwosep"></div>
+            <ul class="blogList">
+
+                @foreach (var of in Model.OfferModels)
+                {
+                    <li>@Html.ActionLink(of.OfferName, "OfferInfo", "Default", new RouteValueDictionary() { { "offerID", of.OfferID } }, new Dictionary<String, Object>() { { "class", "about" } })</li>
+
+                }
+            </ul>
+        </section>*@
+    </div>
+    <!-- six columns ends here -->
+</div>
+<!-- container ends here --> 

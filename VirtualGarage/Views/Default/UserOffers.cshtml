@@ -1,0 +1,33 @@
+﻿@model BarterMarket.Models.ListUserOffersModel
+
+@{
+    ViewBag.Title = "Предложения | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Предложения</h2>
+<div id="cars_in_garage">
+    @if (Model.IsMyOffers)
+    {
+        <div class="actions">
+            <div class="action">
+                @Html.ActionLink("Добавить предложение", "AddOffer")
+            </div>
+        </div>
+
+        <h3>Предложения на рассмотрении модератора</h3>
+        <div id="cars_list">
+            @Html.Partial("OffersDiv", Model.OfferModels.Where(it => it.OfferStatusID == 1).ToList())
+        </div>
+        
+        <h3>Опубликованные предложения</h3>
+    }
+    
+    @Html.ValidationSummary(true)
+    <div id="cars_list">
+        @Html.Partial("OffersDiv", Model.OfferModels.Where(it => it.OfferStatusID == 2).ToList())
+    </div>
+
+</div>
+</div>
+<div class="blankSeparator1"></div>

@@ -1,0 +1,113 @@
+﻿@model BarterMarket.Models.OfferRequestModel
+
+@{
+    ViewBag.Title = "Оформить заявку на предложение | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+    <h2>Оформить заявку на предложение</h2>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/calendar/jquery-ui-1.8.16.custom.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.ui.datepicker-ru.js")"></script>
+
+    @using (Html.BeginForm("OfferRequest", "Default", FormMethod.Post, null ))
+    {
+        @Html.ValidationSummary(true)
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyName)
+                <p>Здесь всё понятно. Дальше)</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanyName)
+                @Html.ValidationMessageFor(model => model.CompanyName)
+            </div> <br />
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyAddress)
+                <p>Юридический или физический нам без разницы</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanyAddress)
+                @Html.ValidationMessageFor(model => model.CompanyAddress)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyRegistrationRegion)
+                <p>Нам важно узнать место Вашей дислокации или место где Вы бываете чаще всего</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanyRegistrationRegion)
+                @Html.ValidationMessageFor(model => model.CompanyRegistrationRegion)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyRegions)
+                <p>Нам важно понимать можете ли Вы оказать услугу по РФ или же в определённом городе. </p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanyRegions)
+                @Html.ValidationMessageFor(model => model.CompanyRegions)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanySite)
+                <p>Очень хочется чтобы у Вас был очень хороший сайт. На платформе будут специалисты у которых Вы можете заказать любой сайт, а оплатить нашей Валютой "ПИАРАМИ"</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanySite)
+                @Html.ValidationMessageFor(model => model.CompanySite)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyDetails)
+                <p>Расскажите детально, чем Вы занимаетесь и какого результата ждёте от нашей платформы</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanyDetails)
+                @Html.ValidationMessageFor(model => model.CompanyDetails)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserName)
+                <p>Это имя будет опубликовано на платформе как контактное лицо</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TelephoneNumber)
+                <p>Этот телефон для связи с Вами новых клиентов</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TelephoneNumber)
+                @Html.ValidationMessageFor(model => model.TelephoneNumber)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SourceAboutUs)
+                <p>Нам важно понимать кто Вам нас посоветовал)</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SourceAboutUs)
+                @Html.ValidationMessageFor(model => model.SourceAboutUs)
+            </div> <br />
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AdvertisingTarget)
+                <p>Распишите Ваши предложения по пакетам. Например: Услуга - маникюр, стоимость 800 рублей=пиаров, даю 10 сертификатов</p>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AdvertisingTarget)
+                @Html.ValidationMessageFor(model => model.AdvertisingTarget)
+            </div> <br />
+
+            <p>
+                <input type="submit" value="Оформить заявку предложение" class="button" />
+            </p>
+    }
+</div>
+<div class="blankSeparator1"></div>

@@ -1,0 +1,129 @@
+﻿@model BarterMarket.Models.AddOfferModel
+
+@{
+    ViewBag.Title = "Добавить предложение | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+    <h2>Добавить предложение</h2>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/calendar/jquery-ui-1.8.16.custom.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.ui.datepicker-ru.js")"></script>
+
+    @using (Html.BeginForm("AddOffer", "Default", FormMethod.Post, new { enctype="multipart/form-data" } ))
+    {
+        @Html.ValidationSummary(true)
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferName)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferName)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferCategoryID)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.OfferModel.OfferCategoryID, 
+                    new List<SelectListItem>() 
+                    { 
+                        new SelectListItem()
+                        { 
+                            Selected = true, 
+                            Text = " - Выберите категорию - ",
+                            Value = ""
+                        }    
+                    }.Concat(Model.OfferModel.OfferCategories), 
+                    new Dictionary<String, Object>() 
+                    {
+                        {"id", "ddlMarks"}
+                    })
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferCategoryID)
+            </div> 
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferManagerName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferManagerName)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferManagerName)
+            </div>
+            
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferManagerPhone)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferManagerPhone)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferManagerPhone)
+            </div>  
+              
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferManagerEmail)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferManagerEmail)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferManagerEmail)
+            </div>  
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferDetails)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.OfferModel.OfferDetails)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferDetails)
+            </div>@*
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferInstagramLink)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferInstagramLink)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferInstagramLink)
+            </div>  
+        
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferVKLink)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferVKLink)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferVKLink)
+            </div>  
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferOdnoklassnikiLink)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferOdnoklassnikiLink)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferOdnoklassnikiLink)
+            </div>  
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferFacebookLink)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferFacebookLink)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferFacebookLink)
+            </div>  
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferTwitterLink)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OfferModel.OfferTwitterLink)
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferTwitterLink)
+            </div>*@
+    
+            <p>
+            Фотография:
+                <input type="file" name="photo" />          
+            </p>
+
+            <p>
+                <input type="submit" value="Добавить предложение" class="button" />
+            </p>
+    }
+</div>
+<div class="blankSeparator1"></div>

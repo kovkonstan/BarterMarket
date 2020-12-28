@@ -1,0 +1,317 @@
+﻿@using BarterMarket.Models
+@model BaseDefaultModel
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+
+<!-- Basic Page Needs ================================================== 
+================================================== -->
+
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="PR-market">
+    <meta name="author" content="">
+    <!--[if lt IE 9]>
+		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+
+    <!-- Mobile Specific Metas ================================================== 
+    ================================================== -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <!-- CSS ==================================================
+    ================================================== -->
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/base.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/skeleton.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/screen.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/prettyPhoto.css")" type="text/css" media="screen" />
+        
+    <!-- Favicons ==================================================
+    ================================================== -->
+
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon.png")">
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/apple-touch-icon.png")">
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/apple-touch-icon-72x72.png")">
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/apple-touch-icon-114x114.png")">
+
+    <!-- Google Fonts ==================================================
+    ================================================== -->
+
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+
+    
+    <script src="@Url.Content("~/Scripts/jquery-1.5.1.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    
+
+        
+    <script src="@Url.Content("~/Scripts/js/jquery-1.8.0.min.js")" type="text/javascript"></script>
+    <!-- Main js files -->     
+    <script src="@Url.Content("~/Scripts/js/screen.js")" type="text/javascript"></script>
+    <!-- Tooltip -->     
+    <script src="@Url.Content("~/Scripts/js/poshytip-1.0/src/jquery.poshytip.min.js")" type="text/javascript"></script>
+    <!-- Tabs -->     
+    <script src="@Url.Content("~/Scripts/js/tabs.js")" type="text/javascript"></script>
+    <!-- Tweets -->     
+    <script src="@Url.Content("~/Scripts/js/jquery.tweetable.js")" type="text/javascript"></script>
+    <!-- Include prettyPhoto -->     
+    <script src="@Url.Content("~/Scripts/js/jquery.prettyPhoto.js")" type="text/javascript"></script>
+    <!-- Include Superfish -->     
+    <script src="@Url.Content("~/Scripts/js/superfish.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/js/hoverIntent.js")" type="text/javascript"></script>
+    <!-- Flexslider -->     
+    <script src="@Url.Content("~/Scripts/js/jquery.flexslider-min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/js/modernizr.custom.29473.js")" type="text/javascript"></script>
+
+    @RenderSection("Head", false)
+</head>
+
+<body>
+
+    <div id="account_header" class="action">
+        @if (Request.IsAuthenticated)
+	    {
+		    <div>Здравствуйте, @Html.ActionLink(Model.UserNick, "Cabinet", "Default")! 
+                            У вас на счету <b> @(Model.UserPiarsCount != 0 ? Model.UserPiarsCount.ToString() : "0") пиаров </b>|
+                            @Html.ActionLink("Выход", "LogOut", "Account")</div>
+	    }
+        else
+	    {
+            <div>@Html.ActionLink("Вход", "LogOn", "Account") | @Html.ActionLink("Регистрация", "Register", "Account")</div>        
+	    }
+    </div>
+    
+    <!-- Home - Content Part ==================================================
+    ================================================== -->
+    <div id="header">
+      <div class="container header"> 
+        <!-- Header | Logo, Menu
+		    ================================================== -->
+        <header>
+          <div class="logo"><a href="/Default/Index"><img src="@Url.Content("~/Content/images/logo.png")" alt="" /></a></div>
+          <div class="mainmenu">
+            <div id="mainmenu">
+              <ul class="sf-menu">
+                <li><a href="/Default/Index" id="@(Model != null && typeof(IndexModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/home.png")" alt="" /></span>Главная</a></li>
+                <li><a href="/Default/Offers" id="@(Model != null && typeof(ListUserOffersModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/shop.png")" alt="" /></span>Товары и услуги</a></li>
+			    <!--<li><a href="/Default/Advertisers" id="@(Model != null && typeof(AdvertisersModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/about.png")" alt="" /></span>Рекламодатели</a></li>-->                
+                @*<li><a href="/Default/OfferRequest" id="@(Model != null && typeof(OfferRequestModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/features.png")" alt="" /></span>Добавить свое предложение</a></li>*@
+                <li><a href="/Default/Questions" id="@(Model != null && typeof(QuestionsModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/portfolio.png")" alt="" /></span>Вопросы</a></li>
+                <!--<li><a href="/Default/News" id="@(Model != null && typeof(NewsModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/features.png")" alt="" /></span>Новости</a></li>-->
+                <li><a href="/Default/About" id="@(Model != null && typeof(AboutModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/about.png")" alt="" /></span>О нас</a></li>
+			    <li><a href="/Default/Contacts" id="@(Model != null && typeof(ContactsModel) == Model.GetType() ? "visited" : "not_visited")"><span class="home"><img src="@Url.Content("~/Content/images/contact.png")" alt="" /></span>Контакты</a></li>			
+              </ul>
+            </div>
+        
+            <!-- Responsive Menu -->        
+            <form id="responsive-menu" action="/Default/NavigationMenu" method="post">
+              <select>
+                <option value="">Навигация по сайту</option>
+                <option value="/Default/Index">Главная</option>
+                <option value="/Default/Offers">Товары и услуги</option>
+                <!--<option value="/Default/Offers">Рекламодатели</option>-->
+                <option value="/Default/Questions">Вопросы</option>
+                <option value="/Default/About">О нас</option>
+                @*<option value="/Default/News">Новости</option>*@
+                <option value="/Default/Contacts">Контакты</option>                
+              </select>
+            </form>
+          </div>
+        </header>
+      </div>
+    </div>
+    
+    @RenderBody()
+    
+    <!--Footer ==================================================
+    ================================================== -->
+    <div id="footer">
+      <div class="container footer">
+
+        <!--<div class="one_fourth">
+          <h3>Лучшие предложения</h3>
+          <ul>
+            <li class="lines"><a href="#" class=""> Педикюр</a></li>
+            <li class="lines"><a href="#" class="">Создание лендинга</a></li>
+            <li class="lines"><a href="#" class="">Реклама в Facebook</a></li>
+        
+          </ul>
+        </div>
+        <div class="one_fourth">
+          <h3>Последние предложения</h3>
+          <ul>
+            <li class="lines"><a href="#" class=""> Маникюр</a></li>
+            <li class="lines"><a href="#" class="">Создание сайта</a></li>
+            <li class="lines"><a href="#" class="">Реклама Вашей фирмы</a></li>
+            <li class="lines"><a href="#" class=""> Раскрутка Инстаграм</a></li>  
+		    <li class="lines"><a href="#" class=""> Реклама в VK</a></li>		
+          </ul>
+        </div>-->
+	    @*<div class="one_fourth">
+          <h3>Новости</h3>
+          <ul>
+            <li class="lines"><a href="#" class=""> Скоро открытие сайта!</a></li>
+		    <li class="lines"><a href="#" class=""> Специальное предложение до 15.06</a></li>
+          </ul>
+        </div>*@
+        <div class="one_fourth lastcolumn">
+          <h3>Напишите нам</h3>
+          <p>Задайте свой вопрос, отправив письмо на <a href="mailto:info@pr-money.com">info@pr-money.com</a> 
+	      или воспользуйтесь нашей <a href="/Default/Contacts">формой обратной связи</a> </p>
+        </div>
+      </div>
+      <!-- container ends here --> 
+    </div>
+    <!-- footer ends here --> 
+    <!-- Copyright ==================================================
+    ================================================== -->
+    <div id="copyright">
+      <div class="container">
+        <div class="eleven columns alpha">
+          <p class="copyright">&copy; PR Money Market 2019</p>
+        </div>
+        <!-- <div class="five columns omega">
+          <section class="socials">
+            <ul class="socials fr">
+              <li><a href="#"><img src="images/socials/instagram.png" class="poshytip" title="Instagram"  alt="" /></a></li>
+              <li><a href="#"><img src="images/socials/facebook.png" class="poshytip" title="Facebook" alt="" /></a></li>
+              <li><a href="#"><img src="images/socials/vk.png" class="poshytip" title="VK" alt="" /></a></li>          
+            </ul>
+          </section>
+        </div> -->
+      </div>
+      <!-- container ends here --> 
+    </div>
+    <!-- copyright ends here --> 
+    <!-- End Document   -->
+
+</body>
+</html>
+
+
+    @*<div id="wrap">
+
+        <div id="header">
+            <img src="@Url.Content("~/Content/images/car-icon-for-use-with-signs-or-buttons_17-1202175859.jpg")" alt="Barter Market" id="img_logo" />
+            <div class="headerleft">
+                <h1><a href="@Url.Content("~/")">PR МARKET</a></h1>
+            </div>
+            <div class="headerright">
+                @if (ViewBag.Title != "Ошибка при входе")
+                {
+                    if (Request.IsAuthenticated)
+                    { 
+                        <div id="login_user_info">
+                            Здравствуйте, @Html.ActionLink(Model.UserNick, "Settings", "Default")! 
+                            У вас на счету <b> @Model.UserPiarsCount.ToString() пиаров </b>|
+                            @Html.ActionLink("Выход", "LogOut", "Account")
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.Partial("LoginDiv", new BarterMarket.Models.LoginModel())
+                    }                                    
+                }
+            </div>
+            
+        </div>
+
+    <div id="menu">
+        <ul>
+            <li>@Html.ActionLink("Главная", "Index", "Default")</li>                
+        </ul>
+        
+        <ul>
+            <li>@Html.ActionLink("Продавцам", "Offers", "Default")</li>                
+        </ul>
+
+        <ul>
+            <li>@Html.ActionLink("Покупателям", "Offers", "Default")</li>                
+        </ul>
+
+        <ul>
+            <li>@Html.ActionLink("Вопрос/Ответ", "Index", "Default")</li>                
+        </ul>
+
+        <ul>
+            <li>@Html.ActionLink("Контакты", "Index", "Default")</li>                
+        </ul>
+    </div>
+
+    <div id="content">
+
+        <div class="right">
+
+            @RenderBody()
+            
+        </div>
+
+        <div class="left">
+            @if (Request.IsAuthenticated)
+            {                      
+                <h2>@Html.ActionLink("Профиль", "Settings", "Default")</h2> 
+                <ul>
+                    <li>@Html.ActionLink("Сертификаты", "UserCertificates", "Default")</li>
+                    <li>@Html.ActionLink("Активация", "Activation", "Default")</li>
+                    <li>@Html.ActionLink("Кошелёк", "UserPurse", "Default")</li>
+                    <li>@Html.ActionLink("Выход", "LogOut", "Account")</li> 
+                </ul>
+                
+                <h2>@Html.ActionLink("Мои предложения", "UserOffers", "Default")</h2>               
+                if (Model.UserOffers.Count != 0)
+                {
+                    <ul>
+                        @foreach (var item in Model.UserOffers)
+                        {
+                            <li>@Html.ActionLink(item.OfferName, "OfferInfo", "Default", new RouteValueDictionary() 
+                                                                                                { 
+                                                                                                    { "offerID", item.OfferID}
+                                                                                                }, null)
+
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        <li>У Вас пока нет предложений</li>
+                    </ul>
+                    
+                }
+            }
+            else
+            {
+                <h2>Начните пользоваться системой:</h2>
+                <h3>1. @Html.ActionLink("Зарегистрируйтесь", "Register", "Account")</h3>
+                <h3>2. Добавьте своё предложение</h3>
+                <h3>3. Пользуйтесь услугами других пользователей</h3>
+            }
+            
+        </div>
+ 
+        <div style="clear: both;"> </div>
+
+    </div>
+
+    <div id="footer">
+        &copy; Copyright 2018-@DateTime.Now.Year.ToString() by <a href="http://ya.ru/">Kokos</a></div>
+    </div>*@
+
+
+
+
+
+

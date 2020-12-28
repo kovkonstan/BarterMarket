@@ -1,0 +1,193 @@
+﻿@model BarterMarket.Models.EditOfferModel
+
+@{
+    ViewBag.Title = "Редактировать предложение | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/calendar/jquery-ui-1.8.16.custom.css")" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.ui.datepicker-ru.js")"></script>
+
+    <div class="blankSeparator"></div>
+    <div class="container blog">
+        <div class="two_third">
+            <section class="post">
+                @Html.HiddenFor(model => model.OfferModel.OfferID)
+                <h2>Редактировать предложение "@Model.OfferModel.OfferName"</h2>
+                                              
+                <p class="meta"> 
+                    <span class="left">Дата: <strong>@Model.OfferModel.OfferDate.ToShortDateString()</strong></span> 
+                    <span class="left">Количество пакетов:  <strong>@Model.OfferModel.OfferPacketsCount</strong></span>
+                    <span class="left tags">Местонахождение: <a href="#" rel="tag">Россия</a></span>
+                    <span class="left tags">Статус: <strong>@Model.OfferModel.OfferStatusName</strong></span>              
+	            </p>
+                <a href="@(Url.Action("GetImage", "Default", new { Model.OfferModel.OfferID }))" class="prettyPhoto[gal]"><img src="@(Url.Action("GetImage", "Default", new { Model.OfferModel.OfferID }))" alt=""/></a>
+                    
+    
+            </section>
+        </div>
+    </div>
+
+<div class="container resume blacktext">
+
+
+@*<div class="info_photo">
+    @if (Model.OfferModel.ImageType != null)
+    {
+        <img class="info_img" src="@Url.Action("GetImage", "Default", new { offerID = Model.OfferModel.OfferID })" alt="" />                
+    }
+    else
+    {
+        <img class="info_img" src="@Url.Content("/Content/Samples/sample_img.jpg")" alt="" />                
+    }                
+</div>*@
+
+@using (Html.BeginForm("EditOffer", "Default", FormMethod.Post, new { enctype="multipart/form-data" } ))
+{
+    @Html.ValidationSummary(true)
+
+        if (Model.UserNick == "admin")
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OfferModel.OfferStatusID)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.OfferModel.OfferStatusID, 
+                    new List<SelectListItem>() 
+                    { 
+                        new SelectListItem()
+                        { 
+                            Selected = (Model.OfferModel.OfferStatusID.ToString() == "1"), 
+                            Text = "На рассмотрении",
+                            Value = "1"
+                        },
+                        new SelectListItem()
+                        { 
+                            Selected = (Model.OfferModel.OfferStatusID.ToString() == "2"), 
+                            Text = "Опубликован",
+                            Value = "2"
+                        },    
+                        new SelectListItem()
+                        { 
+                            Selected = (Model.OfferModel.OfferStatusID.ToString() == "3"), 
+                            Text = "Архивный",
+                            Value = "3"
+                        },
+                    })
+                @Html.ValidationMessageFor(model => model.OfferModel.OfferCategoryID)
+            </div>  
+        }
+    
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.OfferModel.OfferID)
+            @Html.LabelFor(model => model.OfferModel.OfferName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferName)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferName)
+        </div>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferCategoryID)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.OfferModel.OfferCategoryID, 
+                new List<SelectListItem>() 
+                { 
+                    new SelectListItem()
+                    { 
+                        Selected = true, 
+                        Text = " - Выберите категорию - ",
+                        Value = ""
+                    }    
+                }.Concat(Model.OfferModel.OfferCategories), 
+                new Dictionary<String, Object>() 
+                {
+                    {"id", "ddlMarks"}
+                })
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferCategoryID)
+        </div> 
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferManagerName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferManagerName)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferManagerName)
+        </div>
+            
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferManagerPhone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferManagerPhone)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferManagerPhone)
+        </div>  
+              
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferManagerEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferManagerEmail)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferManagerEmail)
+        </div>  
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferDetails)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.OfferModel.OfferDetails)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferDetails)
+        </div>@*
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferInstagramLink)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferInstagramLink)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferInstagramLink)
+        </div>  
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferVKLink)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferVKLink)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferVKLink)
+        </div>  
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferOdnoklassnikiLink)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferOdnoklassnikiLink)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferOdnoklassnikiLink)
+        </div>  
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferFacebookLink)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferFacebookLink)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferFacebookLink)
+        </div>  
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferModel.OfferTwitterLink)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferModel.OfferTwitterLink)
+            @Html.ValidationMessageFor(model => model.OfferModel.OfferTwitterLink)
+        </div>*@
+    
+        <p>
+        Фотография:
+            <input type="file" name="photo" />          
+        </p>
+
+        <p>
+            <input type="submit" value="Сохранить изменения" class="button" />
+        </p>
+}
+</div>
+<div class="blankSeparator1"></div>

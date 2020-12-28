@@ -1,0 +1,25 @@
+﻿@model BarterMarket.Models.AddPiarsModel
+
+@{
+    ViewBag.Title = "Добавить пиары пользователю " + Model.UserName;
+    Layout = "~/Views/Shared/Layouts/_Layout_Admin.cshtml";
+}
+
+<h2>Добавить пиары пользователю @Model.UserName</h2>
+<br />
+<h3>Пользователь: <b>@Model.UserName</b></h3>
+<h3>Количество пиаров: <b>@Model.UserPiarsCounts</b></h3>
+<br />
+<div id="cars_in_garage">
+    @using (Html.BeginForm("AddPiars", "Admin", FormMethod.Post, null))
+    {
+        @Html.HiddenFor(model => model.UserID)        
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PiarsCountsToIncrement)
+        </div>
+        
+         <p>
+            <input type="submit" value="Добавить" class="button" />
+        </p>        
+    }
+</div>

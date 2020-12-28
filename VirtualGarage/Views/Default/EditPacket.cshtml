@@ -1,0 +1,83 @@
+﻿@model BarterMarket.Models.EditPacketModel
+
+@{
+    ViewBag.Title = "Редактировать пакет | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Редактировать пакет к "@Model.OfferName"</h2>
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/calendar/jquery-ui-1.8.16.custom.css")" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.ui.datepicker-ru.js")"></script>
+
+@using (Html.BeginForm("EditPacket", "Default", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PacketModel.OfferID)
+        @Html.HiddenFor(model => model.PacketModel.PacketID)
+        
+        
+        if (Model.UserNick == "admin")
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PacketModel.PacketStatusID)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.PacketModel.PacketStatusID, 
+                    new List<SelectListItem>() 
+                    { 
+                        new SelectListItem()
+                        { 
+                            Selected = (Model.PacketModel.PacketStatusID.ToString() == "1"), 
+                            Text = "На рассмотрении",
+                            Value = "1"
+                        },
+                        new SelectListItem()
+                        { 
+                            Selected = (Model.PacketModel.PacketStatusID.ToString() == "2"), 
+                            Text = "Опубликован",
+                            Value = "2"
+                        },    
+                        new SelectListItem()
+                        { 
+                            Selected = (Model.PacketModel.PacketStatusID.ToString() == "3"), 
+                            Text = "Архивный",
+                            Value = "3"
+                        },
+                    })
+                @Html.ValidationMessageFor(model => model.PacketModel.PacketStatusID)
+            </div>  
+        }
+            
+            
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacketModel.PacketName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacketModel.PacketName)
+            @Html.ValidationMessageFor(model => model.PacketModel.PacketName)
+        </div>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacketModel.PacketCost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacketModel.PacketCost)
+            @Html.ValidationMessageFor(model => model.PacketModel.PacketCost)
+        </div>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacketModel.PacketsCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacketModel.PacketsCount)
+            @Html.ValidationMessageFor(model => model.PacketModel.PacketsCount)
+        </div>    
+
+        <p>
+            <input type="submit" value="Редактировать пакет" class="button" />
+        </p>
+}
+</div>
+<div class="blankSeparator1"></div>

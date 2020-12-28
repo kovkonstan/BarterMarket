@@ -1,0 +1,32 @@
+﻿@model BarterMarket.Models.OfferModel
+
+
+
+    <div class="car_item">
+        <div class="car_img">
+            @if (Model.ImageType != null)
+            {
+                <img src="@(Url.Action("GetImage", "Default", new { Model.OfferID }))" alt="" />
+            }
+            else
+            {
+                <img src="@Url.Content("/Content/Samples/sample_img.jpg")" alt="" />
+            }
+        </div>
+        <h3> @Html.ActionLink(Model.OfferName,
+                        "OfferInfo",
+                        "Default",
+                        new RouteValueDictionary()
+                        {
+                            {"offerID", Model.OfferID}                            
+                        },
+                        new Dictionary<String, Object>() 
+                        {
+                        })
+        </h3>
+
+        <br />
+        @Html.ActionLink(Model.OfferManagerName, "UserInfo", "Default", new RouteValueDictionary() { {"userID", Model.UserID} }, null) <br />
+        <br />
+        @Model.OfferManagerPhone.ToString()
+    </div>

@@ -1,0 +1,90 @@
+﻿@model BarterMarket.Models.ContactsModel
+
+@{
+    ViewBag.Title = "Контакты | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+
+    
+}
+
+<!-- Contact Content Part - GoogleMap ==================================================
+================================================== -->
+<section class="map"> 
+  <!-- google map -->
+  <div class="map-holder">
+    <div class="map-container">
+      <iframe class="map" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Volgograd,+Russia&amp;aq=0&amp;oq=M%C3%BCnchen&amp;sll=48.755620,44.499582&amp;sspn=48.755620,44.499582&amp;ie=UTF8&amp;z=10&amp;iwloc=A&amp;output=embed"></iframe>
+      <!-- end google map --> 
+    </div>
+    <!--map-container ends here--> 
+  </div>
+  <!--map-holder ends here--> 
+</section>
+
+<!-- Contact Content Part - Contact Form ==================================================
+================================================== -->
+<div class="container">
+  <div class="blankSeparator"></div>
+  <!-- Contact Sidebar ==================================================
+================================================== -->
+  <div class="one_third contactsidebar">
+    <section class="first">
+      <h3>Наши контакты</h3>
+      <div class="boxtwosep"></div>
+      <ul class="contactsidebarList">
+        <li>Краснодар: <a href="tel:+79963569450">+7(996)356-94-50</a> Сергей</li>
+		<li>Волгоград: <a href="tel:+79950042344">+7(799)500-423-44</a> Сергей</li>
+		<li>Ростов-на-Дону: <a href="tel:+79281026164">+7(928)102-61-64</a> Сергей</li>
+		        
+        <li>Email: <a href="mailto:info@pr-money.com">info@pr-money.com</a></li>
+      </ul>
+    </section>    
+  </div>
+  <!-- one_third ends here -->
+  <div class="two_third lastcolumn contact1">
+    <div id="contactForm">
+      <h2>Задайте Ваш вопрос</h2>
+      <div class="sepContainer"></div>
+        @using (Html.BeginForm("Contacts", "Default", FormMethod.Post, new Dictionary<String, Object>() 
+                    {
+                        {"id", "contact_form"}
+                    } ))
+        {
+            @Html.ValidationSummary(true)
+                <div class="name">
+                    <label for="name">Ваше имя:</label>
+                    <p> Как мы можем к Вам обращаться</p>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.UserQuestionModel.UserName)
+                        @Html.ValidationMessageFor(model => model.UserQuestionModel.UserName)
+                    </div>
+                </div>
+    
+                <div class="email">
+                    <label for="email">Ваш адрес электронной почты:</label>
+                    <p> Куда мы можем отправить Вам ответ</p>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.UserQuestionModel.UserEmail)
+                        @Html.ValidationMessageFor(model => model.UserQuestionModel.UserEmail)
+                    </div>
+                </div>
+
+                <div class="message">
+                    <label for="message">Ваше сообщение:</label>
+                    <p> Пожалуйста сформулируйте Ваш вопрос</p>                
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.UserQuestionModel.UserMessage)
+                        @Html.ValidationMessageFor(model => model.UserQuestionModel.UserMessage)
+                    </div>
+                </div>
+
+                <div class="name">
+                  <input type="submit" value="Задать вопрос" />
+                </div>
+        }
+
+    </div>
+    <!-- end contactForm --> 
+  </div>
+</div>
+<div class="blankSeparator2"></div>

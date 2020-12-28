@@ -1,0 +1,37 @@
+﻿@model BarterMarket.Models.ListUserOffersModel
+
+@{
+    ViewBag.Title = "Товары и услуги | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="blankSeparator"></div>
+
+<div class="container resume">
+    <h2>Товары и услуги</h2>
+    <div>
+        @using (Html.BeginForm("Offers", "Default", FormMethod.Get, null ))
+        {       
+            <input type="text" name="searchRequest" />
+            <input class="button" type="submit" value="Поиск" />
+        }
+    </div>
+    <br />
+    @*<div id="cars_in_garage">
+        @if (Request.IsAuthenticated)
+        { 
+            <div class="actions">
+                <div class="action">
+                    @Html.ActionLink("Добавить предложение", "AddOffer")
+                </div>
+            </div>
+
+        }
+    
+        <br />
+        @Html.ValidationSummary(true)
+        
+    </div>*@
+</div>
+<div class="blankSeparator"></div>
+@Html.Partial("OffersDiv", Model.OfferModels)
+<div class="blankSeparator"></div>

@@ -1,0 +1,87 @@
+﻿@model BarterMarket.Models.UserCertificatesModel
+@{
+    ViewBag.Title = "Ваши сертификаты | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Ваши сертификаты</h2>
+
+
+<div id="table_top_header">
+    <h3>Приобретенные сертификаты</h3>
+    @if (Model.GottenCertificates.Count() != 0)
+    {    
+        <table>
+            <tr>
+                <th>Номер сертификата</th>
+                <th>Пакет</th>
+                <th>Стоимость</th>
+                <th>Код</th>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Дата активации</th>
+            </tr>
+
+            @foreach (var item in Model.GottenCertificates)
+            {
+                <tr>
+                    <td>@Convert.ToString("000" + item.CertificateID)</td>
+                    <td>
+                        @Html.ActionLink(item.PacketName, "OfferInfo", "Default",
+                                new RouteValueDictionary() { { "offerID", item.OfferID } },
+                                null)
+                    </td>
+                    <td>@(item.PacketCost)</td>
+                    <td>@(item.CertificateCodeValue)</td>
+                    <td>@(item.CertificateCreateDate.ToString())</td>
+                    <td>@(item.CertificateIsImplement ? "Использован" : "Не использован")</td>
+                    <td>@(item.CertificateIsImplement && item.CertificateImplementDate != null ? item.CertificateImplementDate.ToString() : " - ")</td>
+                </tr>                
+            }            
+        </table>
+    }
+    else
+    {
+        <p>Вы пока не приобретали сертификаты</p>        
+    }
+    <br />
+
+    <h3>Проданные сертификаты</h3>
+    @if (Model.SoldCertificates.Count() != 0)
+    {    
+        <table>
+            <tr>
+                <th>Номер сертификата</th>
+                <th>Пакет</th>
+                <th>Стоимость</th>
+@*                <th>Код</th>*@
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Дата активации</th>
+            </tr>
+
+            @foreach (var item in Model.SoldCertificates)
+            {
+                <tr>
+                    <td>@Convert.ToString("000" + item.CertificateID)</td>
+                    <td>
+                        @Html.ActionLink(item.PacketName, "OfferInfo", "Default",
+                                new RouteValueDictionary() { { "offerID", item.OfferID } },
+                                null)
+                    </td>
+                    <td>@(item.PacketCost)</td>
+@*                    <td>@(item.CertificateCodeValue)</td>*@
+                    <td>@(item.CertificateCreateDate.ToString())</td>
+                    <td>@(item.CertificateIsImplement ? "Использован" : "Не использован")</td>
+                    <td>@(item.CertificateIsImplement && item.CertificateImplementDate != null ? item.CertificateImplementDate.ToString() : " - ")</td>
+                </tr>                
+            }            
+        </table>
+    }
+    else
+    {
+        <p>Вы пока не продали ни одного сертификата</p>        
+    }
+</div>
+</div>
+<div class="blankSeparator1"></div>

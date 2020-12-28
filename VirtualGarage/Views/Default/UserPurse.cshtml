@@ -1,0 +1,50 @@
+﻿@model BarterMarket.Models.PurseModel
+@{
+    ViewBag.Title = "Кошелек | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Кошелек</h2>
+
+
+<div id="table_top_header">
+
+    @if (Model.Operations.Count() != 0)
+    {    
+        <table>
+            <tr>
+                <th>Номер операции</th>
+                <th>Тип операции</th>
+                <th>Сумма</th>                
+                <th>Дата</th>                                
+            </tr>
+
+            @foreach (var item in Model.Operations)
+            {
+                <tr>
+                    <td>@Convert.ToString("000" + item.CashOperationID)</td>
+                    <td>@item.CashOperationTypeName
+                        @if (item.CashOperationTypeID == 3)
+                        {
+                            <div>(
+                            @Html.ActionLink(item.PacketName, "OfferInfo", "Default",
+                                new RouteValueDictionary() { { "offerID", item.OfferID } },
+                                null)  
+                            )</div>                               
+                        }
+                    </td>
+                    <td>@(item.CashAmount)</td>
+                    <td>@(item.OperationDate)</td>                    
+                </tr>                
+            }            
+        </table>
+    }
+    else
+    {
+        <p>Вы пока не совершали операции</p>        
+    }
+    <br />
+
+</div>
+</div>
+<div class="blankSeparator1"></div>

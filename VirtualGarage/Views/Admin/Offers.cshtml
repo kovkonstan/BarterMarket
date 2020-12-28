@@ -1,0 +1,67 @@
+﻿@model BarterMarket.Models.ListUserOffersModel
+
+@{
+    ViewBag.Title = "Предложения";
+    Layout = "~/Views/Shared/Layouts/_Layout_Admin.cshtml";
+}
+
+<h2>Предложения</h2>
+
+<table>
+    <tr>
+        <th>Номер</th>
+        <th>Наименование</th>
+        <th>Категория</th>
+        <th>Пользователь</th>
+        <th>Адрес компании</th>
+        <th>Имя менеджера</th>
+        <th>Телефон</th>
+        <th>Email</th>
+        <th>Описание</th>
+        <th>Дата</th>
+        <th>Статус</th>
+
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.OfferModels) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.OfferID)</td>
+        <td>@Html.DisplayFor(modelItem => item.OfferName)</td>
+        <td>@Html.DisplayFor(modelItem => item.OfferCategoryName)</td>
+        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+        <td>@Html.DisplayFor(modelItem => item.OfferCompanyAddress)</td>                
+        <td>@Html.DisplayFor(modelItem => item.OfferManagerName)</td>
+        <td>@Html.DisplayFor(modelItem => item.OfferManagerPhone)</td>
+        <td>@Html.DisplayFor(modelItem => item.OfferManagerEmail)</td>
+        <td>@Html.DisplayFor(modelItem => item.OfferDetails)</td>
+        <td>@item.OfferDate.ToShortDateString()</td>
+        <td>
+            @switch (item.OfferStatusID)
+            {
+                case 1:
+                    <span>На рассмотрении</span>
+                    break;
+                case 2:
+                    <span>Опубликован</span>
+                    break;
+                case 3:
+                    <span>Архивный</span>
+                    break;
+                default:
+                    break;
+            }                           
+            </td>
+
+        <td>
+            @*@Html.ActionLink("Редактировать", "EditUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Информация", "DetailsUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Удалить", "DeleteUser", new { userID=item.UserID }) <br />*@
+            @Html.ActionLink("Просмотр", "EditOffer", "Default", new { offerID=item.OfferID}, null)
+        </td>
+    </tr>
+}
+
+</table>
+s

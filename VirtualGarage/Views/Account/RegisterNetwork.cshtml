@@ -1,0 +1,72 @@
+﻿@model BarterMarket.Models.RegisterNetworkModel
+@using BarterMarket.HtmlHelpers
+
+@{
+    ViewBag.Title = "Регистрация | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+
+<div class="blankSeparator"></div>
+<div class="container resume blacktext">
+
+    <h2>Регистрация</h2>
+               
+    @using (Html.BeginForm("RegisterNetwork", "Account")) {
+        @Html.ValidationSummary(true, "Не удалось создать учетную запись. Исправьте ошибки и повторите попытку.")
+                    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserEmail)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserEmail)
+                @Html.ValidationMessageFor(model => model.UserEmail)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CompanyName)
+                @Html.ValidationMessageFor(model => model.CompanyName)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyDetails)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.CompanyDetails)
+                @Html.ValidationMessageFor(model => model.CompanyDetails)
+            </div>
+
+            <div class="editor-label">
+                @Html.EditorFor(model => model.IsReadRules)
+                Я прочитал и обязуюсь выполнять @Html.ActionLink("Правила сайта", "Rules", "Default")
+                <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.IsReadRules)
+                </div>
+            
+            </div>
+
+            <p>
+                <input type="submit" value="Регистрация" class="button" />
+            </p>
+    }
+</div> 
+<div class="blankSeparator"></div>
+
+@if (Model.IsFirstLoad)
+{
+    <script>
+        $(".validation-summary-errors").attr('class', 'validation-summary-valid');
+        $(".field-validation-error").attr('class', 'field-validation-valid');
+    </script>
+    
+}

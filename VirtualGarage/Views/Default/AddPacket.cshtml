@@ -1,0 +1,52 @@
+﻿@model BarterMarket.Models.AddPacketModel
+
+@{
+    ViewBag.Title = "Добавить пакет к предложению | PR Money Marketv";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Добавить пакет к предложению "@Model.OfferName"</h2>
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/calendar/jquery-ui-1.8.16.custom.css")" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.ui.datepicker-ru.js")"></script>
+
+@using (Html.BeginForm("AddPacket", "Default", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PacketModel.OfferID)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacketModel.PacketName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacketModel.PacketName)
+            @Html.ValidationMessageFor(model => model.PacketModel.PacketName)
+        </div>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacketModel.PacketCost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacketModel.PacketCost)
+            @Html.ValidationMessageFor(model => model.PacketModel.PacketCost)
+        </div>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacketModel.PacketsCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacketModel.PacketsCount)
+            @Html.ValidationMessageFor(model => model.PacketModel.PacketsCount)
+        </div>    
+
+        <p>
+            <input type="submit" value="Добавить пакет" class="button" />
+        </p>
+}
+</div>
+<div class="blankSeparator1"></div>
+
+<script>
+    $("#PacketModel_PacketCost").attr('value', '');
+    $("#PacketModel_PacketsCount").attr('value', '');
+</script>

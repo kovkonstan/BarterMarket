@@ -1,0 +1,23 @@
+﻿@model BarterMarket.Models.ActivationModel
+
+@{
+    ViewBag.Title = "Активация кода | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume">
+    <h2>Активировать код</h2>
+    <div id="cars_in_garage">
+        @using (Html.BeginForm("Activation", "Default", FormMethod.Post, null))
+        {
+
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ActivationCode)
+            </div>
+        
+             <p>
+                <input type="submit" value="Активировать" class="button" />
+            </p>        
+        }
+    </div>
+</div>
+<div class="blankSeparator1"></div>

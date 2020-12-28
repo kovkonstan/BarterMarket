@@ -1,0 +1,37 @@
+﻿@model BarterMarket.Models.NewsModel
+
+@{
+    ViewBag.Title = "Новости | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";    
+}
+
+<!-- Blog Content Part ==================================================
+================================================== -->
+<div class="blankSeparator"></div>
+<div class="container blog">
+  <div class="two_third">
+    <section class="post">
+      <h2>Скоро открытие сайта!</h2>
+      <p class="meta"> <span class="left">Дата: <strong>19.05.2019</strong></span>  </p>
+      <a href="@Url.Content("~/Content/images/portfolio/2.jpg")" class="prettyPhoto[gal]"><img src="@Url.Content("~/Content/images/portfolio/2.jpg")" alt=""/></a>
+      <p>Скоро открытие сайта! Следите за нашими новостями!</p> 
+	</section>	  
+    
+  </div>
+  <!-- ten columns ends here --> 
+  
+  <!-- Blog Sidebar ==================================================
+================================================== -->
+  <div class="one_third lastcolumn sidebar">
+    <section class="first">
+      <h3>Навигация по новостям</h3>
+      <div class="boxtwosep"></div>
+      <ul class="blogList">
+        <li><a class="about" href="/Default/Index" title="">Скоро открытие сайта!</a></li>
+      </ul>
+    </section>    
+  </div>
+  <!-- six columns ends here --> 
+</div>
+<!-- container ends here --> 
+<div class="blankSeparator1"></div>

@@ -1,0 +1,49 @@
+﻿@model List<BarterMarket.Models.OfferModel>
+@using BarterMarket.HtmlHelpers
+ 
+ @if (Model.Count != 0)
+ {
+     <div class="container boxthree">
+        <div class="sepContainer1"><!-- --></div>
+        <div class="blankSeparator"></div>
+        
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="one_third@((i+1)%3 == 0 ? " lastcolumn" : "")">
+                <section class="@((i+1)%3 == 1 ? "boxthreeleft" : ((i+1)%3 == 2 ? "boxthreecenter" : "boxthreeright"))"> 
+                    <div class="img_offer">
+                        @if (Model[i].ImageType != null)
+                        {
+                            <img src="@(Url.Action("GetImage", "Default", new { Model[i].OfferID }))" alt="" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("/Content/Samples/sample_img.jpg")" alt="" />
+                        }
+                    </div>
+                    <h3>@Model[i].OfferName</h3>
+                    <p>@(Model[i].OfferDetails.Count() >= 63 ? Model[i].OfferDetails.Substring(0, 63) + "..." : Model[i].OfferDetails)</p>
+                    @Html.ActionLink("+ Подробнее",
+                        "OfferInfo",
+                        "Default",
+                        new RouteValueDictionary()
+                        {
+                            {"offerID", Model[i].OfferID}                            
+                        },
+                        new Dictionary<String, Object>() 
+                        {
+                            {"class", "simple"}
+                        })
+                </section>
+            </div>       
+        }
+    
+     </div>
+     <div class="blankSeparator1"></div>
+ }
+ else
+ {
+    <div class="container resume">
+        <h2>Предложений пока нет</h2>
+    </div>
+ }

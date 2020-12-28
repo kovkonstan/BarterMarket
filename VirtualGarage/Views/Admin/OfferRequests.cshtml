@@ -1,0 +1,98 @@
+﻿@model List<BarterMarket.Models.OfferRequestModel>
+
+@{
+    ViewBag.Title = "Запросы на регистрацию";
+    Layout = "~/Views/Shared/Layouts/_Layout_Admin.cshtml";
+}
+
+<h2>Запросы на регистрацию</h2>
+
+<p>
+    @Html.ActionLink("Зарегистрировать пользователя", "Register", "Account")
+</p>
+
+<table>
+    <tr>
+        <th>
+            Номер
+        </th>
+        <th>
+            Имя компании
+        </th>
+        <th>
+            Адрес компании
+        </th>
+        <th>
+            Регион регистрации
+        </th>
+        <th>
+            Регионы
+        </th>
+        <th>
+            Сайт
+        </th>
+        <th>
+            Описание компании
+        </th>
+        <th>
+            Имя пользователя
+        </th>
+        <th>
+            Номер телефона
+        </th>
+        <th>
+            Откуда узнали
+        </th>
+        <th>
+            Цель рекламы
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfferRequestID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyRegistrationRegion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyRegions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanySite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelephoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SourceAboutUs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvertisingTarget)
+        </td>
+                
+        <td>
+            @*@Html.ActionLink("Редактировать", "EditUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Информация", "DetailsUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Удалить", "DeleteUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Что то сделать", "AddPiars", new { userID=item.UserID })*@
+        </td>
+    </tr>
+}
+
+</table>

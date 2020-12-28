@@ -1,0 +1,76 @@
+﻿@model List<BarterMarket.Models.UserModel>
+
+@{
+    ViewBag.Title = "Пользователи";
+    Layout = "~/Views/Shared/Layouts/_Layout_Admin.cshtml";
+}
+
+<h2>Пользователи</h2>
+
+<table>
+    <tr>
+        <th>
+            Номер
+        </th>
+        <th>
+            Логин
+        </th>
+        <th>
+            E-mail
+        </th>
+        <th>
+            Пароль
+        </th>
+        <th>
+            Название компании
+        </th>
+        <th>
+            Описание компании
+        </th>
+        <th>
+            Дата регистрации
+        </th>
+        <th>
+            Количество пиаров
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPiarsCount)
+        </td>
+                
+        <td>
+            @*@Html.ActionLink("Редактировать", "EditUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Информация", "DetailsUser", new { userID=item.UserID }) <br />*@
+            @*@Html.ActionLink("Удалить", "DeleteUser", new { userID=item.UserID }) <br />*@
+            @Html.ActionLink("Начислить пиары", "AddPiars", new { userID=item.UserID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,18 @@
+﻿@model BarterMarket.Models.UserInfoModel
+
+@{
+    ViewBag.Title = "Информация о пользователе | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Пользователь @Model.UserName</h2>
+
+@Html.ActionLink("Предложения пользователя " + @Model.UserName, "UserOffers", "Default",
+                            new RouteValueDictionary() 
+                            {
+                                {"userID", @Model.UserID}
+                            },
+                            null)
+</div>
+<div class="blankSeparator1"></div>
+

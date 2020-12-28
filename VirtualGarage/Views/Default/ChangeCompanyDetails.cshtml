@@ -1,0 +1,33 @@
+﻿@model BarterMarket.Models.SettingsModel
+
+@{
+    ViewBag.Title = "Изменить данные о компании | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Изменить данные о компании</h2>
+
+@using(Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Не удалось изменить данные о компании");
+    <div class="editor-label">
+        Введите название компании:
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.UserModel.CompanyName)
+        @Html.ValidationMessageFor(model => model.UserModel.CompanyName)
+    </div>
+    
+    <div class="editor-label">
+        Введите название компании:
+    </div>
+    <div class="editor-field">
+        @Html.TextAreaFor(model => model.UserModel.CompanyDetails)
+        @Html.ValidationMessageFor(model => model.UserModel.CompanyDetails)
+    </div>
+
+    <input class="button" type="submit" value="Изменить данные" />
+
+}
+</div>
+<div class="blankSeparator1"></div>

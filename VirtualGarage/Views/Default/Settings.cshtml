@@ -1,0 +1,59 @@
+﻿@model BarterMarket.Models.SettingsModel
+
+@{
+    ViewBag.Title = "Профиль пользователя | PR Money Market";
+    Layout = "~/Views/Shared/Layouts/_Layout.cshtml";
+}
+<div class="container resume blacktext">
+<h2>Профиль пользователя</h2>
+
+    <div class="table_left_header">
+        <table>
+            <tr>
+                <th>Имя пользователя: </th>
+                <td>@Model.UserModel.UserName</td>
+            </tr>
+            <tr>
+                <th>E-mail:</th>
+                <td>@Model.UserModel.UserEmail</td>
+            </tr>            
+        </table>
+
+        <div class="actions">
+            <div class="action">
+                @Html.ActionLink("Изменить E-mail", "ChangeEmail", "Default")
+            </div>
+            <div class="action">
+                @Html.ActionLink("Изменить пароль", "ChangePassword", "Default")
+            </div>
+        </div>
+    </div>
+
+    <div class="table_left_header">
+        <table>
+            <tr>
+                <th>Имя компании</th>
+                <td>@Model.UserModel.CompanyName</td>
+            </tr>
+            <tr>
+                <th>Описание компании</th>
+                <td>@Model.UserModel.CompanyDetails</td>
+            </tr> 
+            <tr>
+                <th>Количество пиаров</th>
+                <td>@Model.UserModel.UserPiarsCount.ToString()</td>
+            </tr>    
+            <tr>
+                <th>Дата регистрации</th>
+                <td>@Model.UserModel.RegistrationDate.ToString().Substring(0, 10)</td>
+            </tr>           
+        </table>
+
+        <div class="actions">
+            <div class="action">
+                @Html.ActionLink("Изменить данные о компании", "ChangeCompanyDetails", "Default")
+            </div>            
+        </div>
+    </div>
+</div>
+<div class="blankSeparator1"></div>
