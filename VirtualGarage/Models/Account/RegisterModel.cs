@@ -16,7 +16,8 @@ namespace BarterMarket.Models
 		BaseAccountModel BaseModel { get; set; }
 
         [Required]
-        [DisplayName("Имя пользователя")]        
+        [DisplayName("Имя пользователя")]
+        //[UserName(ErrorMessage = "Имя пользователя может состоять только из латинских букв и цифр и начинаться с буквы")]
         public String UserName { get; set; }
 
         [Required]
@@ -42,10 +43,10 @@ namespace BarterMarket.Models
         [DisplayName("Я прочитал и обязуюсь соблюдать ")]
         public Boolean IsReadRules { get; set; }
 
-        [DisplayName("Название Вашей компании (или Instagram)")]
+        [DisplayName("Название Вашей компании")]
         public String CompanyName { get; set; }
 
-        [DisplayName("Описание компании (чем занимается компания)")]
+        [DisplayName("Описание компании")]
         public String CompanyDetails { get; set; }
 
         [DisplayName("Телефон")]

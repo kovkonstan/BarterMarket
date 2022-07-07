@@ -9,14 +9,14 @@
 <div class="blankSeparator"></div>
 <div class="container resume blacktext">
     <h2>Вход в систему</h2>
-
-    @*<a href="#" id="uLogin" data-ulogin="display=window;theme=classic;fields=first_name,last_name;providers=;hidden=;redirect_uri=http%3A%2F%2Fpr-money.com;mobilebuttons=0;">*@
-    @*    <a href="#" id="uLogin" data-ulogin="display=window;theme=classic;fields=first_name,last_name;providers=;hidden=;redirect_uri=http%3A%2F%2Flocalhost:34448;mobilebuttons=0;">
-            <img src="https://ulogin.ru/img/button.png?version=img.2.0.0" width=187 height=30 alt="МультиВход"/>
-        </a>*@
-
-    <div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=facebook,mailru,google;hidden=;redirect_uri=http%3A%2F%2Flocalhost:34448;mobilebuttons=0;"></div>
         
+    @*<a href="#" id="uLogin" data-ulogin="display=window;theme=classic;fields=first_name,last_name;providers=;hidden=;redirect_uri=http%3A%2F%2Fpr-money.com;mobilebuttons=0;">*@
+@*    <a href="#" id="uLogin" data-ulogin="display=window;theme=classic;fields=first_name,last_name;providers=;hidden=;redirect_uri=http%3A%2F%2Flocalhost:34448;mobilebuttons=0;">
+        <img src="https://ulogin.ru/img/button.png?version=img.2.0.0" width=187 height=30 alt="МультиВход"/>
+    </a>*@
+
+    <div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,google,facebook;hidden=other;redirect_uri=http%3A%2F%2Flocalhost:34448;mobilebuttons=0;"></div>
+
     @Html.ValidationSummary(false)
 
     @using (Html.BeginForm())
@@ -24,7 +24,7 @@
         <span>Впервые на сайте? Перейдите к  @Html.ActionLink("регистрации", "Register", "Account").</span>
         <br />
         <span>Забыли пароль? Пройдите процедуру @Html.ActionLink("восстановления пароля", "ForgotPassword", "Account").</span>
-
+    
 
         <div class="editor-label">
             @Html.LabelFor(model => model.UserEmail)
@@ -45,6 +45,6 @@
             Запомнить меня
         </div>
         <input class="button" type="submit" value="Войти" />
-    }
+    } 
 </div> 
 <div class="blankSeparator"></div>

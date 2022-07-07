@@ -84,7 +84,7 @@
         @if (Request.IsAuthenticated)
 	    {
 		    <div>Здравствуйте, @Html.ActionLink(Model.UserNick, "Cabinet", "Default")! 
-                            У вас на счету <b> @(Model.UserPiarsCount != 0 ? Model.UserPiarsCount.ToString() : "0") пиаров </b>|
+                            У вас на счету <b> @(Model.UserPiarsCount != 0 ? Model.UserPiarsCount.ToString() : "пока нет") пиаров </b>|
                             @Html.ActionLink("Выход", "LogOut", "Account")</div>
 	    }
         else

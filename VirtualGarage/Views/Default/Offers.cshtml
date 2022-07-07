@@ -16,7 +16,7 @@
         }
     </div>
     <br />
-    @*<div id="cars_in_garage">
+    <div id="cars_in_garage">
         @if (Request.IsAuthenticated)
         { 
             <div class="actions">
@@ -30,7 +30,7 @@
         <br />
         @Html.ValidationSummary(true)
         
-    </div>*@
+    </div>
 </div>
 <div class="blankSeparator"></div>
 @Html.Partial("OffersDiv", Model.OfferModels)

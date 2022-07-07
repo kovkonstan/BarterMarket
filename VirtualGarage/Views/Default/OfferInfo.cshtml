@@ -12,7 +12,7 @@
                 @Html.HiddenFor(model => model.OfferModel.OfferID)
                 <h2>@Model.OfferModel.OfferName</h2>
                 
-                @*@if (Model.OfferModel.UserID == Model.UserID)
+                @if (Model.OfferModel.UserID == Model.UserID)
                 {
         
                     <div class="offer_action">@Html.ActionLink("Редактировать", "EditOffer", "Default",
@@ -33,13 +33,13 @@
                                     null)
                         <div id="delete_id"></div>
                     </div> 
-                }*@   
+                }   
                 
                 <p class="meta"> 
                     <span class="left">Дата: <strong>@Model.OfferModel.OfferDate.ToShortDateString()</strong></span> 
                     <span class="left">Количество пакетов:  <strong>@Model.OfferModel.OfferPacketsCount</strong></span>
-                    @*<span class="left tags">Местонахождение: <a href="#" rel="tag">Россия</a></span>
-                    <span class="left tags">Статус: <strong>@Model.OfferModel.OfferStatusName</strong></span>*@              
+                    <span class="left tags">Местонахождение: <a href="#" rel="tag">Россия</a></span>
+                    <span class="left tags">Статус: <strong>@Model.OfferModel.OfferStatusName</strong></span>              
 	            </p>
                 <a href="@(Url.Action("GetImage", "Default", new { Model.OfferModel.OfferID }))" class="prettyPhoto[gal]"><img src="@(Url.Action("GetImage", "Default", new { Model.OfferModel.OfferID }))" alt=""/></a>
                 <p>@Model.OfferModel.OfferDetails</p>
@@ -48,7 +48,7 @@
                     <table>
                         @Html.HiddenFor(model => model.OfferModel.OfferID)
                        
-                        @*<tr>
+                        <tr>
                             <th>Адрес:</th>
                             <td>@Html.DisplayFor(model => model.OfferModel.OfferCompanyAddress)</td>
                         </tr>
@@ -66,7 +66,7 @@
                         <tr>
                             <th>E-mail:</th>
                             <td>@Html.DisplayFor(model => model.OfferModel.OfferManagerEmail)</td>
-                        </tr>*@
+                        </tr>
           
                     </table>      
                 </div>          
@@ -81,7 +81,7 @@
     <div class="container blog">
         <h2>Пакеты</h2>
         <div class="actions">
-            @if (Model.UserNick == "admin")
+            @if (Model.OfferModel.UserID == Model.UserID)
             {
         
                 <div class="action">@Html.ActionLink("Добавить пакет", "AddPacket", "Default",
@@ -103,66 +103,65 @@
                     <p class="carsDiv_message">Пакетов пока нет</p>
                 }
                 else
-                {
+                {  
                     foreach (var item in Model.OfferModel.Packets)
                     {
-                        //if (item.PacketStatusID == 2 || Model.OfferModel.UserID == Model.UserID || Model.UserNick == "admin")
-                        //}
-                        <section class="post">     
-                            <div class="packet_actions blacktext">
-                                <h3 style="font-weight:bold">Пакет "@item.PacketName"</h3>
-                                @*@if (Model.OfferModel.UserID == Model.UserID || Model.UserNick == "admin")*@
-                                @if (Model.UserNick == "admin")
-                                {
-                                    @Html.ActionLink("Редактировать",
-                                                                "EditPacket",
-                                                                "Default",
-                                                                new RouteValueDictionary()
-                                                                {
-                                                                    {"packetID", item.PacketID}                            
-                                                                },
-                                                                new Dictionary<String, Object>() 
-                                                                {
-                                                                })
-                                    @Html.Encode(" | ")
-                                    @Ajax.ActionLink("Удалить", "DeletePacket", "Default",
-                                                    new RouteValueDictionary() { { "packetID", item.PacketID} },
-                                                    new AjaxOptions()
-                                                    {
-                                                        Confirm = ("Вы действительно хотите удалить пакет?"),
-                                                        HttpMethod = "Post",
-                                                        UpdateTargetId = "delete_packetid_" + item.PacketID.ToString()
-                                                    },
-                                                    null)    
-                                    <div id="@("delete_packetid_" + @item.PacketID.ToString())"></div>       
-                                    <br />
-                                    <span style="font-weight:bold">Статус пакета: </span> <b>@item.PacketStatusName</b>         
-                                }
+                        if (item.PacketStatusID == 2 || Model.OfferModel.UserID == Model.UserID || Model.UserNick == "admin")
+                        {   
+                            <section class="post">     
+                                <div class="packet_actions blacktext">
+                                    <h3 style="font-weight:bold">Пакет "@item.PacketName"</h3>
+                                    @if (Model.OfferModel.UserID == Model.UserID || Model.UserNick == "admin")
+                                    {
+                                        @Html.ActionLink("Редактировать",
+                                                                    "EditPacket",
+                                                                    "Default",
+                                                                    new RouteValueDictionary()
+                                                                    {
+                                                                        {"packetID", item.PacketID}                            
+                                                                    },
+                                                                    new Dictionary<String, Object>() 
+                                                                    {
+                                                                    })
+                                        @Html.Encode(" | ")
+                                        @Ajax.ActionLink("Удалить", "DeletePacket", "Default",
+                                                        new RouteValueDictionary() { { "packetID", item.PacketID} },
+                                                        new AjaxOptions()
+                                                        {
+                                                            Confirm = ("Вы действительно хотите удалить пакет?"),
+                                                            HttpMethod = "Post",
+                                                            UpdateTargetId = "delete_packetid_" + item.PacketID.ToString()
+                                                        },
+                                                        null)    
+                                        <div id="@("delete_packetid_" + @item.PacketID.ToString())"></div>       
+                                        <br />
+                                        <span style="font-weight:bold">Статус пакета: </span> <b>@item.PacketStatusName</b>         
+                                    }
                                     
-                                <br />
-                                <span style="font-weight:bold">Стоимость: </span> <b>@item.PacketCost</b>
-                                <br />
-                                <span style="font-weight:bold">Дата:</span> <b>@item.PacketDate.ToShortDateString()</b>
-                                <br />
-                                <span style="font-weight:bold">Доступное количество:</span> <b>@item.AvailAblePacketsCount</b>
-                                <br />
-                                @if ((Model.OfferModel.UserID != Model.UserID) &&  item.AvailAblePacketsCount != 0)
-                                {       
-                                    <div class="action">@Ajax.ActionLink("Получить сертификат", "GetCertificate", "Default",
-                                                    new RouteValueDictionary() { { "packetID", item.PacketID} },
-                                                    new AjaxOptions()
-                                                    {
-                                                        Confirm = ("Вы действительно хотите получить сертификат?"),
-                                                        HttpMethod = "Post",
-                                                        UpdateTargetId = "getcertificate_packetid_" + item.PacketID.ToString()
-                                                    },
-                                                    null)
-                                        <div id="@("getcertificate_packetid_" + @item.PacketID.ToString())"></div>
-                                    </div>            
-                                }
-                            </div>
-                        </section>
-                        
+                                    <br />
+                                    <span style="font-weight:bold">Стоимость: </span> <b>@item.PacketCost</b>
+                                    <br />
+                                    <span style="font-weight:bold">Дата:</span> <b>@item.PacketDate.ToShortDateString()</b>
+                                    <br />
+                                    <span style="font-weight:bold">Доступное количество:</span> <b>@item.AvailAblePacketsCount</b>
+                                    <br />
+                                    @if ((Model.OfferModel.UserID != Model.UserID) &&  item.AvailAblePacketsCount != 0)
+                                    {       
+                                        <div class="action">@Ajax.ActionLink("Получить сертификат", "GetCertificate", "Default",
+                                                        new RouteValueDictionary() { { "packetID", item.PacketID} },
+                                                        new AjaxOptions()
+                                                        {
+                                                            Confirm = ("Вы действительно хотите получить сертификат?"),
+                                                            HttpMethod = "Post",
+                                                            UpdateTargetId = "getcertificate_packetid_" + item.PacketID.ToString()
+                                                        },
+                                                        null)
+                                            <div id="@("getcertificate_packetid_" + @item.PacketID.ToString())"></div>
+                                        </div>            
+                                    }
+                                </div>
+                            </section>
+                        }
                     }
                 }
 
